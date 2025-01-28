@@ -27,7 +27,7 @@ class SqlQueries:
 
     song_table_insert = ("""
         SELECT distinct song_id, title, artist_id, year, duration
-        FROM staging_songs
+        FROM staging_songs  
     """)
 
     artist_table_insert = ("""
@@ -40,3 +40,28 @@ class SqlQueries:
                extract(month from start_time), extract(year from start_time), extract(dayofweek from start_time)
         FROM songplays
     """)
+
+    users_table_null_check = ("""
+        SELECT count(*) AS null_count
+        FROM users
+        WHERE userid IS NULL; 
+    """)
+
+    artists_table_null_check = ("""
+        SELECT count(*) AS null_count
+        FROM artists
+        WHERE artistid = ''
+    """)
+
+    songs_table_null_check = ("""
+        SELECT COUNT(*) AS null_count
+        FROM songs
+        WHERE  songid = ''
+    """)
+
+    time_table_null_check = ("""
+        SELECT count(*) AS null_count
+        FROM "time"
+        WHERE start_time IS NULL
+    """)
+
